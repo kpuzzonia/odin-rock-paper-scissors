@@ -19,24 +19,21 @@ function getHumanChoice () {
     // gather choice from user and return it
     let userChoice;
     userChoice = prompt("Please enter rock, paper, or scissors:" );
-
-    // make sure it is all lower case to help with error handling
-    userChoice = userChoice.toLowerCase();
+    
     return userChoice;
 }
 
 function playRound(humanChoice, computerChoice) {
+    humanChoice = humanChoice.toUpperCase();
+    computerChoice = computerChoice.toUpperCase();
     if (humanChoice === computerChoice) {
         console.log("It's a tie!");
     }
-    else if (humanChoice === "rock" && computerChoice === "scissors") {
-        console.log("Rock beats scissors! You get one point!");
+    else if (humanChoice === "ROCK" && computerChoice === "SCISSORS" || humanChoice === "SCISSORS" && computerChoice === "PAPER" || humanChoice === "PAPER" && computerChoice === "ROCK") {
+        console.log(humanChoice + " beats " + computerChoice + "! You get one point!");
     }
-    else if (humanChoice === "scissors" && computerChoice === "paper") {
-        console.log("Scissors best paper! You get one point!");
-    }
-    else if (humanChoice === "paper" && computerChoice === "rock") {
-        console.log("Paper beats rock! You get one point!");
+    else {
+        console.log(computerChoice + " beats " + humanChoice + "! Computer gets one point!");
     }
 }
 
