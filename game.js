@@ -5,43 +5,61 @@ function getComputerChoice() {
     // if statements to give computer output and return it
     let computerChoice;
     if (randomNumber == 1) {
-        return computerChoice = "rock";
+        return computerChoice = "ROCK";
     }
     else if (randomNumber == 2) {
-        return computerChoice = "paper";
+        return computerChoice = "PAPER";
     }
     else {
-        return computerChoice = "scissors"
+        return computerChoice = "SCISSORS"
     }
 }
 
 function getHumanChoice () {
     // gather choice from user and return it
     let userChoice;
-    userChoice = prompt("Please enter rock, paper, or scissors:" );
-    
+    userChoice = prompt("Please enter ROCK, PAPER, or SCISSORS:" );
+
     return userChoice;
 }
 
-function playRound(humanChoice, computerChoice) {
-    humanChoice = humanChoice.toUpperCase();
-    computerChoice = computerChoice.toUpperCase();
-    if (humanChoice === computerChoice) {
-        console.log("It's a tie!");
+
+function playGame () {
+    let humanScore = 0;
+    let computerScore = 0;
+    function playRound(humanChoice, computerChoice) {
+        humanChoice = humanChoice.toUpperCase();
+            console.log("Your choice: " + humanChoice);
+            console.log("Computer choice: " + computerChoice);
+        if (humanChoice === computerChoice) {
+            console.log("It's a tie!");
+        }
+        else if (humanChoice === "ROCK" && computerChoice === "SCISSORS" || humanChoice === "SCISSORS" && computerChoice === "PAPER" || humanChoice === "PAPER" && computerChoice === "ROCK") {
+            console.log(humanChoice + " beats " + computerChoice + "! You get one point!");
+            humanScore += 1;
+        }
+        else {
+            console.log(computerChoice + " beats " + humanChoice + "! Computer gets one point!");
+            computerScore += 1;
+        }
     }
-    else if (humanChoice === "ROCK" && computerChoice === "SCISSORS" || humanChoice === "SCISSORS" && computerChoice === "PAPER" || humanChoice === "PAPER" && computerChoice === "ROCK") {
-        console.log(humanChoice + " beats " + computerChoice + "! You get one point!");
+
+    for (let i=1; i <= 5; i++) {
+        let computerChoice = getComputerChoice();
+        let userChoice = getHumanChoice();
+        playRound(userChoice, computerChoice);
+    }
+    
+    if (humanScore > computerScore) {
+        return ("Computer has " + computerScore + " points and you have " + humanScore + " points. You win!");
+    }
+    else if (humanScore == computerScore) {
+        return ("Computer has " + computerScore + " points and you have " + humanScore + " points. It's a tie!");
     }
     else {
-        console.log(computerChoice + " beats " + humanChoice + "! Computer gets one point!");
+        return ("Computer has " + computerScore + " points and you have " + humanScore + " points. Computer wins!");
     }
 }
 
-let humanScore = 0;
-let computerScore = 0;
 
-let computerChoice = getComputerChoice();
-console.log(computerChoice);
-let humanChoice = getHumanChoice();
-console.log(humanChoice);
-playRound(humanChoice, computerChoice);
+console.log(playGame());
